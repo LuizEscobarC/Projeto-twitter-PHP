@@ -102,8 +102,10 @@ function add_comment($userid,$body, $other_user_id, $id_post, $db ){
 }
 //mostra as publicações
 function show_posts($userid, $db){
+    
     $array_user = array();
     $users_id = following($userid, $db);
+
     if (count($users_id)){
         $array_user = array_values($users_id);
     }else{
@@ -115,7 +117,7 @@ function show_posts($userid, $db){
     $n = count($array_user);
 
     $placeholders = '?'. str_repeat(',?', $n - 1); //no exemplo a string gerada é ?,?,?
-
+    //aqui eu recupero o post user id, corpo, e tempo
     $consulta = "SELECT id ,user_id, body, stamp FROM posts
     WHERE user_id IN ( $placeholders )  
     ORDER BY stamp DESC ";
@@ -126,14 +128,12 @@ function show_posts($userid, $db){
 	$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     // aqui eu recupero id e body de comments
-    $q = $db->query("SELECT comments.id_comment, comments.body_comment 
+    $q = $db->query("SELECT comments.id_comment, comments.body_comment, posts.user_id, comments.stamp, comments.user_id
                  FROM comments, posts 
                  WHERE comments.id_comment = posts.id ");
 
 	  $comments = $q->fetchAll(PDO::FETCH_ASSOC); 
-     
-    
-    
+       
     
     
     //aqui faço um stmt para que todos os posts relacionados a o usuario atual seja imprimido
@@ -198,6 +198,7 @@ function unfollow_user($me,$them, $db){
 				limit 1");
 
         $stmt->execute(array($them, $me));
+
 	}
 }
 // Essa função serve para imprimir o nome do usuario somente com o id
