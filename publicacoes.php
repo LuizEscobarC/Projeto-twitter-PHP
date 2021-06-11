@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION);
 include_once('header.php');
 include_once('functions.php');
 //seta o username da seassão
@@ -87,15 +86,15 @@ $_SESSION['username'] = $user_atual->username;
         $posts = show_posts($_SESSION['userid'], $db);
         if (count($posts)){
             foreach ($posts as $post) {
-                $user_id_atual = select_username($post['user_id'], $db);
+                $user_id_post = select_username($post['user_id'], $db);
                     print <<<HTML
                             <div class="div-publicacao-feed">
-                                <p class="texto-publicacao"><b>{$user_id_atual}</b> {$post['body']}</p>
+                                <p class="texto-publicacao"><b>{$user_id_post}</b> {$post['body']}</p>
                                 <div class="div-comentario-existente">
                                     <p class="nome-perfil-comentario">nome_comentador</p>
                                     <p class="comentario">comentário - aqui qual quer pessoa pode digitar algo</p>
                                     <div class="w-form">
-                                        <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="w-clearfix"><textarea placeholder="..." maxlength="5000" id="field-2" name="field-2" class="textarea w-input"></textarea><input type="submit" value="Comentar" data-wait="Please wait..." class="submit-button w-button"></form>
+                                        <form id="email-form-2" method="GET" action="add.php" name="email-form-2" data-name="Email Form 2" class="w-clearfix"><input type="hidden" name="other_user_id" value="$post[user_id]"> <textarea placeholder="..." maxlength="5000" id="field-2" name="body_comment" class="textarea w-input"></textarea><input type="submit" value="Comentar" data-wait="Please wait..." class="submit-button w-button"></form>
                                         <div class="w-form-done">
                                             <div>Thank you! Your submission has been received!</div>
                                         </div>

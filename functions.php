@@ -92,6 +92,12 @@ function add_post($userid,$body, $db, ){
 
 	$result = $stmt->execute([$userid, $body]);
 }
+function add_comment($userid,$body, $other_user_id, $db ){
+	$stmt = $db->prepare("insert into comments(user_id, body, other_user_id, stamp)
+			              values ( ?, ?, ?, now())");
+
+	$result = $stmt->execute([$userid, $body, $other_user_id]);
+}
 //mostra as publicações
 function show_posts($userid, $db){
     $array_user = array();
