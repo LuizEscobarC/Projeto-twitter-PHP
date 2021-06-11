@@ -93,7 +93,7 @@ function add_post($userid,$body, $db, ){
 	$result = $stmt->execute([$userid, $body]);
 }
 function add_comment($userid,$body, $other_user_id, $db ){
-	$stmt = $db->prepare("insert into comments(user_id, body, other_user_id, stamp)
+	$stmt = $db->prepare("INSERT INTO comments(user_id, body, other_user_id, stamp)
 			              values ( ?, ?, ?, now())");
 
 	$result = $stmt->execute([$userid, $body, $other_user_id]);
