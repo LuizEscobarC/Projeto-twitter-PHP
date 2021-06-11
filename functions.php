@@ -92,6 +92,12 @@ function add_post($userid,$body, $db, ){
 
 	$result = $stmt->execute([$userid, $body]);
 }
+function add_comment($userid,$body, $other_user_id, $id_post, $db ){
+	$stmt = $db->prepare("INSERT INTO comments(user_id, body_comment, other_user_id, id_comment, stamp)
+			              values ( ?, ?, ?, ?, now())");
+
+	$result = $stmt->execute([$userid, $body, $other_user_id, $id_post]);
+}
 //mostra as publicações
 function show_posts($userid, $db){
     $array_user = array();
@@ -108,17 +114,28 @@ function show_posts($userid, $db){
 
     $placeholders = '?'. str_repeat(',?', $n - 1); //no exemplo a string gerada é ?,?,?
 
-    $consulta = "SELECT user_id, body, stamp FROM posts
+    $consulta = "SELECT id ,user_id, body, stamp FROM posts
     WHERE user_id IN ( $placeholders )  
     ORDER BY stamp DESC ";
 
     $stmt = $db->prepare($consulta);
     $stmt->execute($array_user);
   
-	$posts= $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // aqui eu recupero id e body de comments
+    $q = $db->query("SELECT comments.id_comment, comments.body_comment 
+                 FROM comments, posts 
+                 WHERE comments.id_comment = posts.id ");
+
+	  $comments = $q->fetchAll(PDO::FETCH_ASSOC); 
+     
+    
+    
+    
     
     //aqui faço um stmt para que todos os posts relacionados a o usuario atual seja imprimido
-	return $posts;
+	return array($posts, $comments);
 
 }
 //imprime uduários para seguir que não seja o próprio da sessão
@@ -189,4 +206,5 @@ function select_username($userid, $db) {
      $id = $stmt->fetch(PDO::FETCH_OBJ);
     return $id->username; 
 }
+
 ?>
