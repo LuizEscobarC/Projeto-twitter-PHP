@@ -90,28 +90,31 @@ $_SESSION['username'] = $user_atual->username;
                  $user_post_id = $post['id'];
                     print <<<_HTML_INIC
                   <div class="div-publicacao-feed">
-                    <p class="texto-publicacao">
-                      <b>{$user_id_post}</b> {$post['body']}</p>
-                      <div class="div-comentario-existente">
-                       <div class="div-publicacao-feed">             
+                    <p class="texto-publicacao"><b>{$user_id_post}</b> {$post['body']}</p>
+                      <div class="div-comentario-existente">             
                 _HTML_INIC;    
                  foreach ($comments as $comment) { 
-                   if ($comment['id_comment'] == $post['id']){
-                     $comment_body = $comment['body_comment'];
-                   } 
-                    if(isset($comment_body)) {
-                    print <<<HTM
-                    class="nome-perfil-comentario">nome_comentador</p><p class="nome_comentador">{$comment_body}</p>
-                  HTM;
+                    $post_id = $post['id'];
+                    if ($comment['id_comment'] == $post_id){
+                      
+                      $comment_body = $comment['body_comment'];
+                     
+                      if(isset($comment_body) ) {
+                      print <<<HTM
+                          <p class="nome-perfil-comentario">nome_comentador</p>
+                          <p class="nome_comentador">{$comment_body}</p>
+                    HTM;
+                    }
                   }
                 }
                  print <<<_HTML_FIM
                                   <div class="w-form">
                                   <form id="email-form-2" method="GET" action="add.php" name="email-form-2" data-name="Email Form 2" class="w-clearfix"><input type="hidden" name="other_user_id" value="$post[user_id]"><input type="hidden" name="post_id" value="$post[id]"> <textarea placeholder="..." maxlength="5000" id="field-2" name="body_comment" class="textarea w-input"></textarea><input type="submit" value="Comentar" data-wait="Please wait..." class="submit-button w-button"></form>
-                                </div>
+
                               </div>
                             <p ><smal>{$post['stamp']}</smal></p>
                           </div>
+                        </div>
                 _HTML_FIM;
             } 
         }
