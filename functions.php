@@ -93,6 +93,9 @@ function add_post($userid,$body, $db, ){
 	$result = $stmt->execute([$userid, $body]);
 }
 function add_comment($userid,$body, $other_user_id, $id_post, $db ){
+    if (is_null($id_post)) {
+        $id_post = 0;
+    }
 	$stmt = $db->prepare("INSERT INTO comments(user_id, body_comment, other_user_id, id_comment, stamp)
 			              values ( ?, ?, ?, ?, now())");
 
