@@ -1,0 +1,29 @@
+[33mcommit eb27daec96ffcaf1c951149297fbaadb0cd12117[m[33m ([m[1;36mHEAD -> [m[1;32mtest[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Luiz <luiz_escobar112hotmail.com>
+Date:   Fri Jun 11 01:15:12 2021 -0400
+
+    add recebe get ou post de publicacoes.php
+
+[33mcommit e15d34240ecc8bd8026ccf82a11a711e4965b42f[m
+Author: Luiz <luiz_escobar112hotmail.com>
+Date:   Fri Jun 11 01:06:43 2021 -0400
+
+    O add.php recebe a funcionalidade de adicionar ao banco de dados comentarios
+
+[33mcommit 3a9894597559bf7874efe39c9c066973e7a20cae[m
+Author: Luiz <luiz_escobar112hotmail.com>
+Date:   Thu Jun 10 22:12:41 2021 -0400
+
+    teste de commit na branch test
+
+[33mcommit fef18291e928c0bfb7ad96f966b9f6108b79f6d9[m
+Author: Luiz <luiz_escobar112hotmail.com>
+Date:   Thu Jun 10 21:36:45 2021 -0400
+
+    até agora só foi desenvolvido um twitter que tem as opções: logar, cadastrar, seguir, feed dos seguidores.
+
+[33mcommit 698dd675ee1a221b2adb1b6a8fd88e827c450d52[m
+Author: Luiz <luiz_escobar112hotmail.com>
+Date:   Thu Jun 10 21:32:08 2021 -0400
+
+    Até aqui a funcionalidade pbulicações já foi feita

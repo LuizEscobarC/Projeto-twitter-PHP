@@ -15,7 +15,11 @@ if ($_GET['other_user_id'] && $_GET['body_comment'])
 {
     $body = substr( $_GET['body_comment'], 0, 140 );
     $other_user_id = $_GET['other_user_id'];
+<<<<<<< HEAD
     add_comment($userid, $body, $other_user_id, $db);
+=======
+    add_comment($userid, $body, $other_user_id, $_GET['post_id'], $db);
+>>>>>>> master
     header("Location:publicacoes.php");
 }
 
