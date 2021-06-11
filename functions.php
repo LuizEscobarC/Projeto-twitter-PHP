@@ -1,10 +1,12 @@
 <?php
-function show_form($errors = array(), $input = array()) {
+function show_form($errors = array(), $input = array()) 
+{
     include_once('index.php');
 
 }
 
-function validate_form_cadastro() {
+function validate_form_cadastro() 
+{
     $errors = array();
     $input = array();
     //deve ter
