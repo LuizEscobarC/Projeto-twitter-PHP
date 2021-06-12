@@ -22,7 +22,5 @@ if ($_GET['other_user_id'] && $_GET['body_comment'])
 
 $_SESSION['message'] = "Seu post foi adicionado!";
 
-
-
 }
 ?>

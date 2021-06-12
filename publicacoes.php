@@ -1,5 +1,5 @@
 <?php
-if(session_status()!=PHP_SESSION_ACTIVE) session_start();
+ session_start();
 include_once('header.php');
 include_once('functions.php');
 //seta o username da seassão
