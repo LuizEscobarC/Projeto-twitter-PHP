@@ -126,6 +126,7 @@ $_SESSION['username'] = $user_atual->username;
             } 
         }
         ?>
+        
         <!-- fim do feed do usuario-->
   
 <style>
