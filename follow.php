@@ -18,14 +18,8 @@
 
     }
     //$_SESSION['message'] = $msg;
-    // futuramente imprimir com um framework uma caixa na tela dizendo q esta seguindo
-<<<<<<< HEAD
+    // futuramente imprimir com um framework uma caixa na tela dizendo q esta seguindo 
 
-    header("Location:publicacoes.php");
-    session_destroy();
+    header("Location: publicacoes.php");
     ?>
-=======
     
-    header("location: publicacoes.php");
-?>
->>>>>>> master

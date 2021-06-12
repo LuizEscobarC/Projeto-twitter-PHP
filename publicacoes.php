@@ -1,10 +1,5 @@
 <?php
-<<<<<<< HEAD
- session_start();
-=======
 session_start();
- var_dump($_SESSION);
->>>>>>> master
 include_once('header.php');
 include_once('functions.php');
 //seta o username da seassão

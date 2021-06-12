@@ -2,7 +2,7 @@
 
 function show_form($errors = array(), $input = array()) 
 {
-    include('index.php');
+    include_once('index.php');
 
 }
 
@@ -49,14 +49,16 @@ function validate_form_login() {
                strlen($input_login['password_login']) < 5) {
         $errors_login[] = 'Senha inválida';
     }   
-
+    //forma uma lista de erros
+    if ($errors_login) {
     $errors_login = "<li>" . implode (' </li><li> ', $errors_login );
+    }
 
     return array($errors_login, $input_login);
 }
-
 function process_form($input = array(), $db) {
         //cadastra e volta ao começo
+        session_start();
         if(array_key_exists('email', $input) && $input != 0){
             //nome, se caso houver uma consulta pelo nome 
             //e não seja sql injection
@@ -73,7 +75,6 @@ function process_form($input = array(), $db) {
             header('location: index.php');
         //loga na conta pela key de $input   
         } else if (array_key_exists('email_login', $input) && $input != 0) {  
-            session_start();
             $stmt ="SELECT id FROM users WHERE email= :email AND password= :password";
             $resultado= $db->prepare($stmt);
              
@@ -82,9 +83,9 @@ function process_form($input = array(), $db) {
             $resultado->execute();
             $input_db = $resultado->fetch(PDO::FETCH_OBJ); 
             if ( $input_db ){
-                 header('location: publicacoes.php');
+                header('location: publicacoes.php');
             } else {
-                header('location:index.php');
+                header('location: index.php');
             }
         }
 
