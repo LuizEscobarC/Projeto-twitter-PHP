@@ -1,5 +1,5 @@
 <?php
-var_dump($_GET);
+var_dump($_SESSION);
     session_start();
     include_once("header.php");
     include_once("functions.php");
@@ -23,4 +23,5 @@ var_dump($_GET);
     // futuramente imprimir com um framework uma caixa na tela dizendo q esta seguindo
 
     header("Location:publicacoes.php");
+    session_destroy();
 ?>
