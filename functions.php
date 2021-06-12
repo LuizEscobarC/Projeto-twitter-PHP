@@ -86,7 +86,7 @@ function process_form($input = array(), $db) {
 
 }
 //adiciona um post
-function add_post($userid,$body, $db, ){
+function add_post($userid,$body, $db ){
 	$stmt = $db->prepare("insert into posts (user_id, body, stamp)
 			              values ( ?, ?, now())");
 
