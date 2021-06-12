@@ -93,7 +93,7 @@ $_SESSION['username'] = $user_atual->username;
                   <div class="div-publicacao-feed">
                     <p class="texto-publicacao"><b>{$user_id_post}</b> {$post['body']}</p>
                       <div class="div-comentario-existente">             
-              _HTML_INIC; 
+               _HTML_INIC; 
                 /*************************************************************/
                 //imprime comentários
                  foreach ($comments as $comment) { 

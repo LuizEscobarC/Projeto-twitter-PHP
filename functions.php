@@ -92,13 +92,6 @@ function add_post($userid,$body, $db, ){
 
 	$result = $stmt->execute([$userid, $body]);
 }
-<<<<<<< HEAD
-function add_comment($userid,$body, $other_user_id, $db ){
-	$stmt = $db->prepare("INSERT INTO comments(user_id, body, other_user_id, stamp)
-			              values ( ?, ?, ?, now())");
-
-	$result = $stmt->execute([$userid, $body, $other_user_id]);
-=======
 function add_comment($userid,$body, $other_user_id, $id_post, $db ){
   
     
@@ -106,7 +99,6 @@ function add_comment($userid,$body, $other_user_id, $id_post, $db ){
 			              values ( ?, ?, ?, ?, now())");
 
 	$result = $stmt->execute([$userid, $body, $other_user_id, $id_post]);
->>>>>>> master
 }
 //mostra as publicações
 function show_posts($userid, $db){
