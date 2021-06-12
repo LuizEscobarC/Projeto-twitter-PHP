@@ -37,15 +37,6 @@
                   }
                 }
                 ?>          
-              <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Algo deu errado ao enviar a informação.</div>
-            </div>
-          </div>
-
-
         </div>
         <div class="div-cadastrar">
           <p class="cadastre-se">cadastre-se</p>

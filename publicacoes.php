@@ -67,17 +67,12 @@ $_SESSION['username'] = $user_atual->username;
                                             
           ?>
     </div>
+    </div>
     <div class="div-feed">
       <div class="container-publicacoes">
         <div class="bloco-publicacao">
           <div class="w-form">
             <form id="email-form" name="email-form" data-name="Email Form" method="POST" action="add.php"><textarea placeholder="Texto da Publicação" maxlength="5000" id="field" name="body" class="texto-publicar w-input"></textarea><input type="submit" value="Publicar" data-wait="Please wait..." class="botao-publicar w-button"></form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
           </div>
         </div>
         <p class="feed">Feed</p>
