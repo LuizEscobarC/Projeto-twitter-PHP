@@ -24,11 +24,13 @@ function validate_form_cadastro()
         $errors[] = 'Digite uma senha até 8 caracteres';
     }
     $input['new_password'] = $_POST['name-4'];
-    if ($input['new_password'] != $input['password']) {
+    if ($input['new_password'] != $input['password'] || strlen($input['new_password']) < 5 || strlen($input['new_password']) > 8) {
         $errors[] = 'Digite uma senha maior que 8 caracteres';
     } else {
         $input['password'] = $input['new_password'];
     }
+
+    $errors = "<li>" . implode (' </li><li> ', $errors );
 
     return array($errors, $input);
 }
@@ -44,9 +46,12 @@ function validate_form_login() {
 
     $input_login['password_login'] = $_POST['password_login'];
     if (strlen($input_login['password_login']) > 8 || is_null($input_login['password_login']) || 
-               $input_login['password_login'] < 4) {
-        $errors_login[] = 'Digite uma senha até 8 caracteres';
+               strlen($input_login['password_login']) < 5) {
+        $errors_login[] = 'Senha inválida';
     }   
+
+    $errors_login = "<li>" . implode (' </li><li> ', $errors_login );
+
     return array($errors_login, $input_login);
 }
 
@@ -77,7 +82,6 @@ function process_form($input = array(), $db) {
             $resultado->execute();
             $input_db = $resultado->fetch(PDO::FETCH_OBJ); 
             if ( $input_db ){
-                $_SESSION['userid'] = $input_db->id;
                  header('location: publicacoes.php');
             } else {
                 header('location:index.php');

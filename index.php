@@ -33,9 +33,7 @@
                 //se post email estiver setado imprime os erros de login
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
                   if(isset($errors) && array_key_exists('email_login', $_POST)) {
-                    foreach ($errors as $error){
-                        print "<li class=\"comentario\">" . $error . "</li>";  
-                    }
+                        print "<ul>" . $errors . "</ul>";  
                   }
                 }
                 ?>          
@@ -61,9 +59,7 @@
             // se name de cadastro estiver setado e for post imprime os erros de cadastro
               if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if(isset($errors) && array_key_exists('name', $_POST)) {
-                    foreach ($errors as $error){
-                        print "<li class=\"comentario\">" . $error . "</li>";  
-                    }
+                  print "<ul>" . $errors . "</ul>"; 
                 }
               }
             
