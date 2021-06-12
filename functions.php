@@ -1,7 +1,8 @@
 <?php
+
 function show_form($errors = array(), $input = array()) 
 {
-    include_once('index.php');
+    include('index.php');
 
 }
 
@@ -23,11 +24,13 @@ function validate_form_cadastro()
         $errors[] = 'Digite uma senha até 8 caracteres';
     }
     $input['new_password'] = $_POST['name-4'];
-    if ($input['new_password'] != $input['password']) {
+    if ($input['new_password'] != $input['password'] || strlen($input['new_password']) < 5 || strlen($input['new_password']) > 8) {
         $errors[] = 'Digite uma senha maior que 8 caracteres';
     } else {
         $input['password'] = $input['new_password'];
     }
+
+    $errors = "<li>" . implode (' </li><li> ', $errors );
 
     return array($errors, $input);
 }
@@ -43,21 +46,23 @@ function validate_form_login() {
 
     $input_login['password_login'] = $_POST['password_login'];
     if (strlen($input_login['password_login']) > 8 || is_null($input_login['password_login']) || 
-               $input_login['password_login'] < 4) {
-        $errors_login[] = 'Digite uma senha até 8 caracteres';
+               strlen($input_login['password_login']) < 5) {
+        $errors_login[] = 'Senha inválida';
     }   
+
+    $errors_login = "<li>" . implode (' </li><li> ', $errors_login );
+
     return array($errors_login, $input_login);
 }
 
 function process_form($input = array(), $db) {
         //cadastra e volta ao começo
-        if(array_key_exists('email', $input)){
-            //nome (se casa houver uma consulta pelo nome que não seja sql injection)
+        if(array_key_exists('email', $input) && $input != 0){
+            //nome, se caso houver uma consulta pelo nome 
+            //e não seja sql injection
             $input_sanitaze['username'] = $db->quote($input['username']);
             $input_sanitaze['username'] = strtr($input_sanitaze['username'], array('_'=>'\_', '%' => '\%'));
-            //email
             $input_sanitaze['email'] = $db->quote($input['email']);
-            //senha
             $input_sanitaze['password'] = $db->quote($input['password']);
             //cadastra
             $c = $db->exec("
@@ -65,10 +70,10 @@ function process_form($input = array(), $db) {
                 VALUES ( $input_sanitaze[username], 
                         $input_sanitaze[email], $input_sanitaze[password] )
             ");
-            header('location:index.php');
-        //loga    
-        } else if (array_key_exists('email_login', $input)) {  
-
+            header('location: index.php');
+        //loga na conta pela key de $input   
+        } else if (array_key_exists('email_login', $input) && $input != 0) {  
+            session_start();
             $stmt ="SELECT id FROM users WHERE email= :email AND password= :password";
             $resultado= $db->prepare($stmt);
              
@@ -77,8 +82,7 @@ function process_form($input = array(), $db) {
             $resultado->execute();
             $input_db = $resultado->fetch(PDO::FETCH_OBJ); 
             if ( $input_db ){
-                $_SESSION['userid'] = $input_db->id;
-                 header('location:publicacoes.php');
+                 header('location: publicacoes.php');
             } else {
                 header('location:index.php');
             }
@@ -86,7 +90,7 @@ function process_form($input = array(), $db) {
 
 }
 //adiciona um post
-function add_post($userid,$body, $db, ){
+function add_post($userid,$body, $db ){
 	$stmt = $db->prepare("insert into posts (user_id, body, stamp)
 			              values ( ?, ?, now())");
 
@@ -120,30 +124,27 @@ function show_posts($userid, $db){
     //aqui eu recupero o post user id, corpo, e tempo
     $consulta = "SELECT id ,user_id, body, stamp FROM posts
     WHERE user_id IN ( $placeholders )  
-    ORDER BY stamp DESC ";
+    ORDER BY stamp DESC LIMIT 5";
 
     $stmt = $db->prepare($consulta);
     $stmt->execute($array_user);
   
 	$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // aqui eu recupero id e body de comments
+    // aqui eu recupero ID e BODY de comments
     $q = $db->query("SELECT comments.id_comment, comments.body_comment, posts.user_id, comments.stamp, comments.user_id
-                 FROM comments, posts 
-                 WHERE comments.id_comment = posts.id ");
-
-	  $comments = $q->fetchAll(PDO::FETCH_ASSOC); 
-       
-    
+                     FROM comments, posts 
+                     WHERE comments.id_comment = posts.id ");
+	  $comments = $q->fetchAll(PDO::FETCH_ASSOC);    
     
     //aqui faço um stmt para que todos os posts relacionados a o usuario atual seja imprimido
 	return array($posts, $comments);
 
 }
-//imprime uduários para seguir que não seja o próprio da sessão
+//imprime uduários para SEGUIR que não seja o próprio da sessão
 function show_users($db){
 	$users = array();
-	$stmt = "select id, username from users WHERE  id <> ? order by username";
+	$stmt = "SELECT id, username FROM users WHERE  id <> ? ORDER BY username";
 	$result = $db->prepare($stmt);
     $result->execute(array($_SESSION['userid']));
 
@@ -167,13 +168,14 @@ function following($userid, $db){
 	return $users;
 
 }
-//checa se já segue ou não
+//checa se já segue ou não e retorna a contagem $first = me, $second  = them
 function check_count($first, $second,$db){
 	$stmt = $db->prepare( "SELECT count(*) AS count FROM following
 			               WHERE user_id= ? AND follower_id= ?");
 	$stmt->execute(array($second, $first));
 
 	$row = $stmt->fetch(PDO::FETCH_OBJ);
+    
 	return $row->count;
 
 }

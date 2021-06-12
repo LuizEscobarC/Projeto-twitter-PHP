@@ -2,7 +2,6 @@
     session_start();
     include_once("header.php");
     include_once("functions.php");
-
     $id = $_GET['id'];
     $do = $_GET['do'];
 
@@ -20,7 +19,13 @@
     }
     //$_SESSION['message'] = $msg;
     // futuramente imprimir com um framework uma caixa na tela dizendo q esta seguindo
+<<<<<<< HEAD
 
     header("Location:publicacoes.php");
     session_destroy();
     ?>
+=======
+    
+    header("location: publicacoes.php");
+?>
+>>>>>>> master

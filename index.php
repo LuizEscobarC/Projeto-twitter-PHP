@@ -1,9 +1,9 @@
+<?php include_once('header.php');?>
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
 <!--  Last Published: Wed Oct 16 2019 23:46:02 GMT+0000 (UTC)  -->
 <html data-wf-page="5da766d32783b34770fbc796" data-wf-site="5da766d32783b3459dfbc795">
 <head>
-  <?php include_once('header.php');?>
   <meta charset="utf-8">
   <title>Desafio</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -30,13 +30,10 @@
             <form method="POST" action="control.php" id="email-form" name="email-form" data-name="Email Form" class="w-clearfix">
               <div class="div-text-field w-clearfix"><input type="text" required name="email_login" maxlength="256" placeholder="E-MAIL" id="node" class="text-field-entrar margem-right w-input"><input  required type="text" name="password_login" maxlength="256" placeholder="SENHA" id="node" class="text-field-entrar w-input"><a href="#" class="link-esqueceu-sua-senha">Esqueceu sua senha?</a></div><input type="submit" value="ENTRAR" data-wait="Please wait..." class="botao-entrar w-button"></form>
                 <?php
-                var_dump($_POST);
                 //se post email estiver setado imprime os erros de login
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
                   if(isset($errors) && array_key_exists('email_login', $_POST)) {
-                    foreach ($errors as $error){
-                        print "<li class=\"comentario\">" . $error . "</li>";  
-                    }
+                        print "<ul>" . $errors . "</ul>";  
                   }
                 }
                 ?>          
@@ -62,9 +59,7 @@
             // se name de cadastro estiver setado e for post imprime os erros de cadastro
               if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if(isset($errors) && array_key_exists('name', $_POST)) {
-                    foreach ($errors as $error){
-                        print "<li class=\"comentario\">" . $error . "</li>";  
-                    }
+                  print "<ul>" . $errors . "</ul>"; 
                 }
               }
             
