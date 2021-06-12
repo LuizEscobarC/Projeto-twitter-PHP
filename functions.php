@@ -2,7 +2,7 @@
 
 function show_form($errors = array(), $input = array()) 
 {
-    header('location: index.php');
+    include('index.php');
 
 }
 
@@ -52,7 +52,7 @@ function validate_form_login() {
 
 function process_form($input = array(), $db) {
         //cadastra e volta ao começo
-        if(array_key_exists('email', $input)){
+        if(array_key_exists('email', $input) && $input != 0){
             //nome, se caso houver uma consulta pelo nome 
             //e não seja sql injection
             $input_sanitaze['username'] = $db->quote($input['username']);
@@ -65,10 +65,10 @@ function process_form($input = array(), $db) {
                 VALUES ( $input_sanitaze[username], 
                         $input_sanitaze[email], $input_sanitaze[password] )
             ");
-            header('location:index.php');
+            header('location: index.php');
         //loga na conta pela key de $input   
-        } else if (array_key_exists('email_login', $input)) {  
-
+        } else if (array_key_exists('email_login', $input) && $input != 0) {  
+            session_start();
             $stmt ="SELECT id FROM users WHERE email= :email AND password= :password";
             $resultado= $db->prepare($stmt);
              
@@ -78,7 +78,7 @@ function process_form($input = array(), $db) {
             $input_db = $resultado->fetch(PDO::FETCH_OBJ); 
             if ( $input_db ){
                 $_SESSION['userid'] = $input_db->id;
-                 header('location:publicacoes.php');
+                 header('location: publicacoes.php');
             } else {
                 header('location:index.php');
             }

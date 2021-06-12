@@ -1,5 +1,6 @@
 <?php
 session_start();
+ var_dump($_SESSION);
 include_once('header.php');
 include_once('functions.php');
 //seta o username da seassão
@@ -14,9 +15,6 @@ $resultado->execute();
 
 $user_atual =  $resultado->fetch(PDO::FETCH_OBJ);
 $_SESSION['username'] = $user_atual->username;     
-?>
-<?php
-    header("refresh: 3;");
 ?>
 
 <!DOCTYPE html>
@@ -86,46 +84,45 @@ $_SESSION['username'] = $user_atual->username;
         <p class="feed">Feed</p>
         <!-- fim do feed do usuario-->
         <?php
-       list($posts, $comments) = show_posts($_SESSION['userid'], $db);
-       //tenho o id do post, id do comentario, do usuario, do outro
-       if (count($posts)){
-           foreach ($posts as $post) {
-               $user_id_post = select_username($post['user_id'], $db);
-                $user_post_id = $post['id'];
-               
-                  print "<div class=\"div-publicacao-feed\">\n";
-                    print  "<p class=\"texto-publicacao\"><b>{$user_id_post}</b>{$post['body']}</p>\n";
-                    print "<div class=\"div-comentario-existente\">\n";              
-               /*************************************************************/
-               //imprime comentários
-                foreach ($comments as $comment) { 
-                   $post_id = $post['id'];
-                   
-                   if ($comment['id_comment'] == $post_id){
-                     $name_comment = select_username($comment['user_id'],$db);
-                     $comment_body = $comment['body_comment'];
-                    // verifica se comment esta setado e retorna
-
-                     if(isset($comment_body) && $post['id'] = $comment['id_comment'] ) {
+        list($posts, $comments) = show_posts($_SESSION['userid'], $db);
+        //tenho o id do post, id do comentario, do usuario, do outro
+        if (count($posts)){
+            foreach ($posts as $post) {
+                $user_id_post = select_username($post['user_id'], $db);
+                 $user_post_id = $post['id'];
+                
+                   print "<div class=\"div-publicacao-feed\">\n";
+                     print  "<p class=\"texto-publicacao\"><b>{$user_id_post}</b>{$post['body']}</p>\n";
+                     print "<div class=\"div-comentario-existente\">\n";              
+                /*************************************************************/
+                //imprime comentários
+                 foreach ($comments as $comment) { 
+                    $post_id = $post['id'];
                     
-                      print "<p class=\"nome-perfil-comentario\">{$name_comment}</p>\n";
-                        print "<p class=\"nome_comentador\">{$comment_body}</p>\n";
-                   }
-                 }
-               }
-               /* */
-               /************************************************************/
-                               print  "<div class=\"w-form\">\n";
-                               print  "<form id=\"email-form-2\" method=\"GET\" action=\"add.php\" name=\"email-form-2\" data-name=\"Email Form 2\" class=\"w-clearfix\"><input type=\"hidden\" name=\"other_user_id\" value=\"$post[user_id]\"><input type=\"hidden\" name=\"post_id\" value=\"$post[id]\"> <textarea placeholder=\"...\" maxlength=\"5000\" id=\"field-2\" name=\"body_comment\" class=\"textarea w-input\"></textarea><input type=\"submit\" value=\"Comentar\" data-wait=\"Please wait...\" class=\"submit-button w-button\"></form>\n";
+                    if ($comment['id_comment'] == $post_id){
+                      $name_comment = select_username($comment['user_id'],$db);
+                      $comment_body = $comment['body_comment'];
+                     // verifica se comment esta setado e retorna
 
-                            print "</div>\n";
-                           print "<p><smal>{$post['stamp']}</small></p>\n";
-                         print "</div>\n";
-                       print "</div>\n";
-           } 
-       }
+                      if(isset($comment_body) && $post['id'] = $comment['id_comment'] ) {
+                     
+                       print "<p class=\"nome-perfil-comentario\">{$name_comment}</p>\n";
+                         print "<p class=\"nome_comentador\">{$comment_body}</p>\n";
+                    }
+                  }
+                }
+                /* */
+                /************************************************************/
+                                print  "<div class=\"w-form\">\n";
+                                print  "<form id=\"email-form-2\" method=\"GET\" action=\"add.php\" name=\"email-form-2\" data-name=\"Email Form 2\" class=\"w-clearfix\"><input type=\"hidden\" name=\"other_user_id\" value=\"$post[user_id]\"><input type=\"hidden\" name=\"post_id\" value=\"$post[id]\"> <textarea placeholder=\"...\" maxlength=\"5000\" id=\"field-2\" name=\"body_comment\" class=\"textarea w-input\"></textarea><input type=\"submit\" value=\"Comentar\" data-wait=\"Please wait...\" class=\"submit-button w-button\"></form>\n";
+
+                             print "</div>\n";
+                            print "<p><smal>{$post['stamp']}</small></p>\n";
+                          print "</div>\n";
+                        print "</div>\n";
+            } 
+        }
         ?>
-        
         <!-- fim do feed do usuario-->
   
 <style>
@@ -137,3 +134,5 @@ $_SESSION['username'] = $user_atual->username;
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>
+
+

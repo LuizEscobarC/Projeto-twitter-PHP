@@ -8,7 +8,7 @@ $body = substr($_POST['body'], 0, 140);
 
 add_post($userid, $body, $db);
 
-header("Location:publicacoes.php");
+header("Location: publicacoes.php");
 } else {
 
 if ($_GET['other_user_id'] && $_GET['body_comment'])
