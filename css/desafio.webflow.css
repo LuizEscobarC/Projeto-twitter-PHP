@@ -101,6 +101,21 @@
 .topo-publicacoes {
   position: relative;
 }
+.div-perfil-2 {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 0%;
+  bottom: auto;
+  display: inline-block;
+  width: 32%;
+  height: 100%;
+  padding-top: 30px;
+  float: right;
+  background-color: #039ff5;
+  text-align: center;
+}
+
 
 .div-perfil {
   position: absolute;
@@ -319,6 +334,9 @@
   .div-perfil {
     width: 200px;
   }
+  .div-perfil-2 {
+    width: 300px;
+  }
   .div-feed {
     width: 70%;
   }
@@ -329,7 +347,7 @@
     width: 95%;
   }
   .div-publicacao-feed {
-    width: 95%;
+    width: 60%;
   }
 }
 
@@ -344,6 +362,11 @@
     margin-bottom: 100px;
   }
   .div-perfil {
+    position: relative;
+    width: 100%;
+    padding-bottom: 30px;
+  }
+  .div-perfil-2 {
     position: relative;
     width: 100%;
     padding-bottom: 30px;

@@ -40,7 +40,7 @@ $_SESSION['username'] = $user_atual->username;
 <body>
   
   <div class="topo-publicacoes w-clearfix">
-     <!-- Não estou mexendo no css porque fiz muita cagada lá  :') -->
+     <!-- Não estou mexendo muito no css porque fiz muita cagada lá  :') -->
         <div>
         <p class="feed feed-margin-left">
         <a class="botao-seguir a1" href="feedglobal.php">Feed</a>   
@@ -52,8 +52,10 @@ $_SESSION['username'] = $user_atual->username;
       <a href="control.php" class="botao-seguir w-inline-block">
         <p class="seguir">LOG OUT</p>
       </a>  
-     <p>.</p><hr><p>.</p>
-      <?php 
+     
+    </div>
+    <div class="div-perfil-2">
+    <?php 
           // imprime os usuários e se quer seguir ou não
           $users = show_users($db);
           $following = following($_SESSION['userid'], $db);
@@ -76,7 +78,9 @@ $_SESSION['username'] = $user_atual->username;
                                             
           ?>
     </div>
+
     <div class="div-feed">
+    
       <div class="container-publicacoes">
         <div class="bloco-publicacao">
           <div class="w-form">
@@ -93,7 +97,7 @@ $_SESSION['username'] = $user_atual->username;
                  $user_post_id = $post['id'];
                 
                    print "<div class=\"div-publicacao-feed\">\n";
-                     print  "<p class=\"texto-publicacao\"><b>{$user_id_post}</b>{$post['body']}</p>\n";
+                     print  "<p class=\"texto-publicacao\"><b>{$user_id_post}</b>: {$post['body']}</p>\n";
                      print "<div class=\"div-comentario-existente\">\n";              
                 /*************************************************************/
                 //imprime comentários
@@ -126,6 +130,7 @@ $_SESSION['username'] = $user_atual->username;
         ?>
         <!-- fim do feed do usuario-->
       </div>
+      
     <style>
     .w-webflow-badge {display: none !important;}
     </style>
