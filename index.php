@@ -43,10 +43,8 @@
           <div class="w-form">
             <form id="email-form-2" method="POST" action="control.php" name="email-form-2" data-name="Email Form 2">
               <input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name" data-name="Name" placeholder="NOME" id="name"><input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="E-MAIL" id="name-2"><input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name-3" data-name="Name 3" placeholder="SENHA" id="name-3"><input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name-4" data-name="Name 3" placeholder="CONFIRMAR SENHA" id="name-3"><input type="submit" value="CADASTRAR"  data-wait="Please wait..." class="botao-cadastrar w-button"></form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div><?php
+            <div>
+              <?php
             // se name de cadastro estiver setado e for post imprime os erros de cadastro
               if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if(isset($errors) && array_key_exists('name', $_POST)) {
@@ -55,9 +53,6 @@
               }
             
             ?></div>
-            <div class="w-form-fail">  
-              <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
           </div>
         </div>
       </div>

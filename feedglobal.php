@@ -27,7 +27,6 @@ $_SESSION['username'] = $user_atual->username;
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/desafio.webflow.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -38,37 +37,29 @@ $_SESSION['username'] = $user_atual->username;
   <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
 <body>
-  
   <div class="topo-publicacoes w-clearfix">
-     <!-- Não estou mexendo no css porque fiz muita cagada lá  :') -->
-        <div>
-        <p class="feed feed-margin-left">
-        <a class="botao-seguir a1" href="feedglobal.php">Feed</a>   
-        <a class="botao-seguir a1" href="feedglobal.php">Feedglobal</a>  
-        <a class="botao-seguir a1" href="chat.php">Chat</a></p>
-        </div>
     <div class="div-perfil">
       <p class="nome-perfil"><?=$_SESSION['username']?></p>
       <a href="control.php" class="botao-seguir w-inline-block">
         <p class="seguir">LOG OUT</p>
-      </a>  
-     <p>.</p><hr><p>.</p>
+      </a>
+      <p>.</p>
       <?php 
           // imprime os usuários e se quer seguir ou não
           $users = show_users($db);
           $following = following($_SESSION['userid'], $db);
 
           foreach ($users as $key => $user) {
-            print "<p class=\" p-font\">". $user ."</p>";
+            print "<p class=\"nome-perfil-comentario\">". $user ."</p>";
             if (in_array($key, $following)){
               $_GET['id'] = $key;
               $_GET['do'] = 'follow';
-                  print"<a nome=\"follow\" href=\"follow.php?id=$key&do=unfollow\" class=\"botao-seguir follow_list w-inline-block\">
+                  print"<a nome=\"follow\" href=\"follow.php?id=$key&do=unfollow\" class=\"botao-seguir w-inline-block\">
                           <p class=\"seguir\"><small>Não seguir</small></p>
                         </a>";      
             } else {
               
-                print"<a href=\"follow.php?id=$key&do=follow\" class=\"botao-seguir follow_list w-inline-block\">
+                print"<a href=\"follow.php?id=$key&do=follow\" class=\"botao-seguir w-inline-block\">
                   <p class=\"seguir\"><small>Seguir</small></p>
                 </a>";  
             }
@@ -83,6 +74,7 @@ $_SESSION['username'] = $user_atual->username;
             <form id="email-form" name="email-form" data-name="Email Form" method="POST" action="add.php"><textarea placeholder="Texto da Publicação" maxlength="5000" id="field" name="body" class="texto-publicar w-input"></textarea><input type="submit" value="Publicar" data-wait="Please wait..." class="botao-publicar w-button"></form>
           </div>
         </div>
+        <p class="feed">Feed</p>
         <!-- fim do feed do usuario-->
         <?php
         list($posts, $comments) = show_posts($_SESSION['userid'], $db);
@@ -125,10 +117,10 @@ $_SESSION['username'] = $user_atual->username;
         }
         ?>
         <!-- fim do feed do usuario-->
-      </div>
-    <style>
-    .w-webflow-badge {display: none !important;}
-    </style>
+  
+<style>
+ .w-webflow-badge {display: none !important;}
+</style>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>

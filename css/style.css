@@ -1,0 +1,19 @@
+.a1 {
+    background-color:#039FF5;
+    margin-right: 30px;
+  }
+  .feed-margin-left {
+    margin-left: 240px;
+    margin-top: 20px;
+    float:left;
+  }
+  .follow_list {
+    background-color:#039FF5;
+  }
+  .p-font {
+    color:whitesmoke;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }

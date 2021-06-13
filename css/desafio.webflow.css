@@ -72,6 +72,7 @@
 }
 
 .cadastre-se {
+  margin-top: 130px;
   margin-bottom: 30px;
   font-family: 'PT Sans', sans-serif;
   font-size: 25px;
@@ -213,7 +214,7 @@
 }
 
 .div-publicacao-feed {
-  width: 80%;
+  width: 70%;
   margin-bottom: 100px;
   padding: 20px;
   border-style: solid;
