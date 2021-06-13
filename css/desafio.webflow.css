@@ -108,15 +108,13 @@
   right: 0%;
   bottom: auto;
   display: inline-block;
-  width: 32%;
+  width: 25%;
   height: 100%;
-  padding-top: 30px;
+  margin-top: 0px;
   float: right;
   background-color: #039ff5;
   text-align: center;
 }
-
-
 .div-perfil {
   position: absolute;
   left: 0%;
@@ -124,15 +122,16 @@
   right: auto;
   bottom: auto;
   display: inline-block;
-  width: 15%;
+  width: 16%;
   height: 100%;
-  padding-top: 30px;
+  margin-top: 70px;
   float: left;
   background-color: #039ff5;
   text-align: center;
 }
 
 .nome-perfil {
+  padding-top: 20px;
   margin-bottom: 30px;
   font-family: 'PT Sans', sans-serif;
   color: #fff;
@@ -154,18 +153,52 @@
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   font-family: 'PT Sans', sans-serif;
-  color: #fff;
-  font-size: 18px;
+  color: rgb(253, 253, 253);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.botao-seguir-2 {
+  padding: 10px 30px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-family: 'PT Sans', sans-serif;
+  color: rgb(253, 253, 253);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.botao-seguir-3 {
+  padding: 10px 30px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 50px;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  font-family: 'PT Sans', sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
 }
 
-.botao-seguir:hover {
-  background-color: #fff;
+
+.botao-seguir-2:hover {
+  background-color:rgb(255, 0, 0);
   color: #039ff5;
 }
-
+.botao-seguir:hover {
+  background-color:rgb(255, 255, 255);
+  color: #039ff5;
+}
+.botao-seguir-3:hover {
+  background-color:rgba(3, 133, 255, 0.337);
+  color: #0f03f5;
+}
 .div-feed {
   display: inline-block;
   width: 85%;
@@ -175,7 +208,7 @@
 }
 
 .bloco-publicacao {
-  width: 70%;
+  width: 90%;
   margin-bottom: 100px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -221,7 +254,7 @@
 }
 
 .feed {
-  margin-bottom: 30px;
+  margin-bottom: px;
   font-family: 'PT Sans', sans-serif;
   font-size: 30px;
   font-weight: 700;
@@ -229,12 +262,12 @@
 }
 
 .div-publicacao-feed {
-  width: 70%;
+  width: 90%;
   margin-bottom: 100px;
   padding: 20px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px 18px rgba(0, 195, 255, 0.522);
 }
 
 .nome-perfil-comentario {
@@ -243,14 +276,16 @@
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
-  border-style: solid solid none;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.172);
   font-family: 'PT Sans', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   text-align: left;
   text-transform: capitalize;
+  border: 1px solid;
+  padding: 10px;
+  margin-left: 15px;
+  box-shadow: 0px 1px 1px #888888;
 }
 
 .comentario {
@@ -258,9 +293,9 @@
   padding: 10px 15px;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.131);
   font-size: 16px;
-  line-height: 23px;
+  line-height: 20px;
 }
 
 .texto-publicacao {
@@ -268,6 +303,9 @@
   padding: 10px;
   font-size: 25px;
   line-height: 30px;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 1px 5px 4px #888888;
 }
 
 .textarea {
@@ -347,7 +385,7 @@
     width: 95%;
   }
   .div-publicacao-feed {
-    width: 60%;
+    width: 100%;
   }
 }
 

@@ -120,12 +120,11 @@ function show_posts($userid, $db){
 
 
     $n = count($array_user);
-
+    //Se fosse mostrar somente os posts de quem o usuario está seguindo
     $placeholders = '?'. str_repeat(',?', $n - 1); //no exemplo a string gerada é ?,?,?
     //aqui eu recupero o post user id, corpo, e tempo
-    $consulta = "SELECT id ,user_id, body, stamp FROM posts
-    WHERE user_id IN ( $placeholders )  
-    ORDER BY stamp DESC LIMIT 5";
+    $consulta = "SELECT id ,user_id, body, stamp FROM posts  
+    ORDER BY stamp DESC ";
 
     $stmt = $db->prepare($consulta);
     $stmt->execute($array_user);
@@ -197,8 +196,7 @@ function unfollow_user($me,$them, $db){
 
 	if ($count != 0){
 		$stmt = $db->prepare("DELETE FROM following
-				WHERE user_id= ? and follower_id= ?
-				limit 1");
+				WHERE user_id= ? and follower_id= ?");
 
         $stmt->execute(array($them, $me));
 
@@ -207,11 +205,12 @@ function unfollow_user($me,$them, $db){
 // Essa função serve para imprimir o nome do usuario somente com o id
 function select_username($userid, $db) {
     $stmt = $db->prepare("SELECT username FROM users
-                          WHERE  id = ? LIMIT 1");
+                          WHERE  id = ? LIMIT 10");
     $stmt->execute(array($userid));
      $id = $stmt->fetch(PDO::FETCH_OBJ);
     return $id->username; 
 }
+
 function select_perfil ($userid, $db) {
     $stmt = $db->query("SELECT FROM users WHERE id = $userid");
     $stmt->exec();

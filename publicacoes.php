@@ -21,6 +21,7 @@ $_SESSION['username'] = $user_atual->username;
 <!--  Last Published: Wed Oct 16 2019 23:46:02 GMT+0000 (UTC)  -->
 <html data-wf-page="5da786dd00b10d79c698bf04" data-wf-site="5da766d32783b3459dfbc795">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <title>Publicações</title>
   <meta content="Publicações" property="og:title">
@@ -38,22 +39,22 @@ $_SESSION['username'] = $user_atual->username;
   <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
 <body>
-  
   <div class="topo-publicacoes w-clearfix">
      <!-- Não estou mexendo muito no css porque fiz muita cagada lá  :') -->
-        <div>
-        <p class="feed feed-margin-left">
-        <a class="botao-seguir a1" href="feedglobal.php">Feed</a>   
-        <a class="botao-seguir a1" href="feedglobal.php">Feedglobal</a>  
-        <a class="botao-seguir a1" href="chat.php">Chat</a></p>
-        </div>
+     <div>
+        <nav class="feed feed-margin-left">
+        <a class="botao-seguir-3 a1" href="#">Feed</a>   
+        <a class="botao-seguir-3 a1" href="feed/explorar.php">Explorar</a>  
+        <a class="botao-seguir-3 a1" href="feed/perfil.php">Perfil</a></nav>
+    </div>
     <div class="div-perfil">
       <p class="nome-perfil"><?=$_SESSION['username']?></p>
       <a href="control.php" class="botao-seguir w-inline-block">
-        <p class="seguir">LOG OUT</p>
+        <p class="seguir">Sair</p>
       </a>  
      
     </div>
+    
     <div class="div-perfil-2">
     <?php 
           // imprime os usuários e se quer seguir ou não
@@ -61,18 +62,13 @@ $_SESSION['username'] = $user_atual->username;
           $following = following($_SESSION['userid'], $db);
 
           foreach ($users as $key => $user) {
-            print "<p class=\" p-font\">". $user ."</p>";
             if (in_array($key, $following)){
+              print "<p class=\" p-font\">@". $user ."</p>";
               $_GET['id'] = $key;
               $_GET['do'] = 'follow';
-                  print"<a nome=\"follow\" href=\"follow.php?id=$key&do=unfollow\" class=\"botao-seguir follow_list w-inline-block\">
-                          <p class=\"seguir\"><small>Não seguir</small></p>
+                  print"<a nome=\"follow\" href=\"follow.php?id=$key&do=unfollow\" class=\"botao-seguir-2 follow_list w-inline-block\">
+                          <p class=\"seguir\"><small>Deixar de seguir</small></p>
                         </a>";      
-            } else {
-              
-                print"<a href=\"follow.php?id=$key&do=follow\" class=\"botao-seguir follow_list w-inline-block\">
-                  <p class=\"seguir\"><small>Seguir</small></p>
-                </a>";  
             }
           }
                                             
@@ -80,11 +76,11 @@ $_SESSION['username'] = $user_atual->username;
     </div>
 
     <div class="div-feed">
-    
+      
       <div class="container-publicacoes">
         <div class="bloco-publicacao">
           <div class="w-form">
-            <form id="email-form" name="email-form" data-name="Email Form" method="POST" action="add.php"><textarea placeholder="Texto da Publicação" maxlength="5000" id="field" name="body" class="texto-publicar w-input"></textarea><input type="submit" value="Publicar" data-wait="Please wait..." class="botao-publicar w-button"></form>
+            <form id="email-form" name="email-form" data-name="Email Form" method="POST" action="add.php"><textarea placeholder="O que está acontecendo:" maxlength="5000" id="field" name="body" class="texto-publicar w-input"></textarea><input type="submit" value="Publicar" data-wait="Please wait..." class="botao-publicar w-button"></form>
           </div>
         </div>
         <!-- fim do feed do usuario-->
@@ -112,6 +108,7 @@ $_SESSION['username'] = $user_atual->username;
                       if(isset($comment_body) && $post['id'] = $comment['id_comment'] ) {
                      
                        print "<p class=\"nome-perfil-comentario\">{$name_comment}</p>\n";
+                       print "<small class=\"comment-stamp\">{$comment['stamp']}</small>\n";
                          print "<p class=\"nome_comentador\">{$comment_body}</p>\n";
                     }
                   }

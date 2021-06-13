@@ -1,11 +1,12 @@
-.a1 {
+  .a1 {
     background-color:#039FF5;
-    margin-right: 30px;
+    margin-right: 10px;
   }
   .feed-margin-left {
-    margin-left: 240px;
-    margin-top: 20px;
-    float:left;
+    padding-left: 429px;
+    padding-top: 20px;
+    padding-bottom: 24px;
+    
   }
   .follow_list {
     background-color:#039FF5;
@@ -16,4 +17,37 @@
     text-align: center;
     margin-top: 15px;
     margin-bottom: 5px;
+  }
+  nav {
+    background-color:#03a0f551;
+    padding-right: 500px;
+    padding-left: 500px;
+    
+
+  }
+  .bloco-publicacao {
+    margin-top: 100px;
+  }
+  .texto-publicacao:hover {
+    text-shadow: #5eacdcbb 6px 8px 10px;
+  }
+  .publicacao-feed {
+    box-shadow: #022233;
+  }
+  .nome_comentador {
+    margin-left: 25px;
+    border-style: solid;
+    border-color: rgba(0, 1, 1, 0.172);
+  }
+  .comment-stamp {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 1, 1, 0.378);
+    text-decoration:solid;
+    border-width: 1px;
+    margin-left: 20px;
+  }
+  body {
+    background-color: rgba(51, 47, 47, 0.083);
+    min-height: auto;
   }
