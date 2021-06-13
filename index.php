@@ -24,7 +24,6 @@
         <div class="div-azul"></div>
         <div class="div-formulario">
           <div class="div-entrar">
-
             <!--FORM login-->
             <div class="w-form">
               <form method="POST" action="control.php" id="email-form" name="email-form" data-name="Email Form" class="w-clearfix">
@@ -32,9 +31,9 @@
                 <?php
                 //se post email estiver setado imprime os erros de login
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
-                  if(isset($errors) && array_key_exists('email_login', $_POST)) {
-                    print "<ul>" . $errors . "</ul>";  
-                  }
+                    if(isset($errors) && array_key_exists('email_login', $_POST)) {
+                        print "<ul>" . $errors . "</ul>";  
+                    }
                 }
                 ?>          
               </div>
@@ -44,14 +43,13 @@
                   <form id="email-form-2" method="POST" action="control.php" name="email-form-2" data-name="Email Form 2">
                     <input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name" data-name="Name" placeholder="NOME" id="name"><input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="E-MAIL" id="name-2"><input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name-3" data-name="Name 3" placeholder="SENHA" id="name-3"><input required type="text" class="text-field-cadastrar w-input" maxlength="256" name="name-4" data-name="Name 3" placeholder="CONFIRMAR SENHA" id="name-3"><input type="submit" value="CADASTRAR"  data-wait="Please wait..." class="botao-cadastrar w-button"></form>
                     <div>
-                      <?php
-            // se name de cadastro estiver setado e for post imprime os erros de cadastro
-                      if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    <?php
+                    // se name de cadastro estiver setado e for post imprime os erros de cadastro
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         if(isset($errors) && array_key_exists('name', $_POST)) {
-                          print "<ul>" . $errors . "</ul>"; 
+                            print "<ul>" . $errors . "</ul>"; 
                         }
-                      }
-                      
+                    }       
                     ?></div>
                   </div>
                 </div>
@@ -63,8 +61,8 @@
             .w-webflow-badge {display: none !important;}
           </style>
         </div>
-        <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="js/webflow.js" type="text/javascript"></script>
-        <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-        </body>
-        </html>
+      <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="js/webflow.js" type="text/javascript"></script>
+    <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  </body>
+</html>
