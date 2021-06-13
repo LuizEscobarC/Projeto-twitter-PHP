@@ -1,7 +1,7 @@
 <?php
-session_start();
 include_once('header.php');
 include_once('functions.php');
+session_start();
 //seta o username da seassão
 $stmt=" SELECT username
         FROM users

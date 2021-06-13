@@ -2,8 +2,7 @@
 
 function show_form($errors = array(), $input = array()) 
 {
-    include_once('index.php');
-
+    header('location: index.php');
 }
 
 function validate_form_cadastro() 
@@ -82,6 +81,7 @@ function process_form($input = array(), $db) {
             $resultado->bindValue(":password",$input['password_login']);
             $resultado->execute();
             $input_db = $resultado->fetch(PDO::FETCH_OBJ); 
+            $_SESSION['userid'] = $input_db->id;
             if ( $input_db ){
                 header('location: publicacoes.php');
             } else {
