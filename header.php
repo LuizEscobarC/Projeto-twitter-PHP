@@ -4,6 +4,7 @@ if (! isset($_SESSION)) {
     session_set_cookie_params($time); 
     session_start();
 }
+
 //Seta a conexão
 $host = '127.0.0.1';
 $dbname = 'twitter';
