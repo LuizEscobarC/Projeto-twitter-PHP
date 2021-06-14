@@ -84,7 +84,7 @@ include_once('functions_explorar.php');
                   $user_id_post = select_username($post['user_id'], $db);
                   $user_post_id = $post['id'];
                   print "<div class=\"div-publicacao-feed\">\n";
-                  print  "<p class=\"texto-publicacao\"><b>@{$user_id_post}</b>{$post['body']}</p>\n";
+                  print  "<p class=\"texto-publicacao\"><b>@{$user_id_post}: </b>   {$post['body']}</p>\n";
                   print "<div class=\"div-comentario-existente\">\n";              
                  //imprime comentários
                   foreach ($comments as $comment) { 

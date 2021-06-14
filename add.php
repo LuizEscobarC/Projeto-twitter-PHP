@@ -7,7 +7,7 @@ $userid = $_SESSION['userid'];
     entre comentários e publicações
 */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $body = substr($_POST['body'], 0, 140);
+    $body = substr(htmlentities($_POST['body']), 0, 140);
     add_post($userid, $body, $db);
 
   header("Location: publicacoes.php");
