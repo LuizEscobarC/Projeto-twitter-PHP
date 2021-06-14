@@ -53,10 +53,6 @@ function validate_form_login($db)
     if (strlen($input_login['password_login']) > 8 || is_null($input_login['password_login']) || 
         strlen($input_login['password_login']) < 5) {
         $errors_login[] = 'Senha inválida';
-    }   
-    //forma uma lista de erros
-    if ($errors_login) {
-        $errors_login = "<li>" . implode (' </li><li> ', $errors_login );
     }
     $stmt ="SELECT id FROM users WHERE email= :email 
     AND password= :password";
@@ -67,7 +63,11 @@ function validate_form_login($db)
     $resultado->execute();
     $input_db = $resultado->fetch(PDO::FETCH_OBJ);
     if ($input_db === false) {
-        $errors_login[] = "Senha inválida";
+        $errors_login[] = "A senha não coincide";
+    }   
+    //forma uma lista de erros
+    if ($errors_login) {
+        $errors_login = "<li>" . implode (' </li><li> ', $errors_login );
     }
 return array($errors_login, $input_login);
 }
