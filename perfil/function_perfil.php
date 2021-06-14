@@ -42,7 +42,7 @@ function followers_count($userid, $db)
 }
 function deslogar()
 {
-    if ( ! in_array('userid', $_SESSION)) {
+    if ( ! array_key_exists('userid', $_SESSION)) {
         header('location: ../index.php');
     }
 }

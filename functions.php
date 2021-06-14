@@ -129,7 +129,7 @@ function show_posts($userid, $db)
 
     $placeholders = '?'. str_repeat(',?', $n - 1); 
     // No exemplo a string gerada é ?,?,?
-    //aqui eu recupero o post user id, corpo, e tempo
+    // aqui eu recupero o post user id, corpo, e tempo
     // Com essa função dava pra criar mais um funcionalidade onde se aumenta
     // o limite de posts e atualiza se certo botão for clicado (carregar mais), igual ao antigo
     // feed do Facebook que hoje é automático
@@ -187,8 +187,9 @@ function following($userid, $db)
 //checa se já segue ou não e retorna a contagem $first = me, $second  = them
 function check_count($first, $second,$db)
 {
-    $stmt = $db->prepare( "SELECT count(*) AS count FROM following
-     WHERE user_id= ? AND follower_id= ?");
+    $stmt = $db->prepare("SELECT count(*) 
+                          AS count FROM following
+                          WHERE user_id= ? AND follower_id= ?");
     $stmt->execute(array($second, $first));
 
     $row = $stmt->fetch(PDO::FETCH_OBJ);
@@ -196,16 +197,6 @@ function check_count($first, $second,$db)
 
 }
 //verifica e segue o usuario $them
-function follow_user($me,$them,$db)
-{
-    $count = check_count($me, $them, $db);
-    if ($count == 0) {
-        $stmt = $db->prepare("INSERT INTO following (user_id, follower_id)
-                              values (? , ?)");
-        $stmt->execute(array($them, $me));
-    }
-}
-
 function unfollow_user($me,$them, $db)
 {
       $count = check_count($me,$them, $db);
