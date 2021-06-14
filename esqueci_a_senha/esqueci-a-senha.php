@@ -1,3 +1,4 @@
+<!--Envia o email a redefinir-->
 <form method="post" action="recuperar.php">
         <div class="input_form_login">
             <label for="email_aluno">Insira o seu e-mail e redefina a sua senha.</label>

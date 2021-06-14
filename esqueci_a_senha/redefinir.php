@@ -1,17 +1,17 @@
 <?php
     include('../header.php');   
+    // Faz validações e redefine a senha
 ?>
 
 <html>
     <body>
         <?php
-            if(isset($_GET['token'])){
+            if (isset($_GET['token'])) {
                 $token = $_GET['token'];
-                if($token != $_SESSION['token']){
+                if ($token != $_SESSION['token']) {
                      die('O token não corresponde');
                 } else {
         ?>
-
         <div class="bg_login">
             <div class="box_esqueci_a_senha">
             <?php
@@ -19,18 +19,18 @@
                $sql->execute([$_SESSION['email']]);
                $info = $sql->fetch();
               
-               if($sql->rowCount() == 1){    
-                   if(isset($_POST['redefinirsenha'])){
-                        $senha = $_POST['senha_aluno'];
-                        $criptografada = password_hash($senha, PASSWORD_DEFAULT);
-                        $sql = $db->prepare("UPDATE users SET password = ? WHERE email = ?");
-                        $sql->execute([$criptografada, $_SESSION['email']]);
-                        echo '<script>alert(A sua senha foi redefinida com sucesso.)</script>';
-                        header('location: ../Login_Cadastro.php');                                                
-                   }
-               } else {
-                echo '<script>alert(Não encontramos esse email)</script>';
-               }  
+                    if ($sql->rowCount() == 1) {    
+                        if (isset($_POST['redefinirsenha'])) {
+                            $senha = $_POST['senha_aluno'];
+                            $criptografada = password_hash($senha, PASSWORD_DEFAULT);
+                            $sql = $db->prepare("UPDATE users SET password = ? WHERE email = ?");
+                            $sql->execute([$criptografada, $_SESSION['email']]);
+                            echo '<script>alert(A sua senha foi redefinida com sucesso.)</script>';
+                            header('location: ../Login_Cadastro.php');                                                
+                        }
+                    } else {
+                        echo '<script>alert(Não encontramos esse email)</script>';
+                    }  
             ?>
                 <div class="head_login">
                     <h2><i class="fas fa-lock"></i> Redefinir a minha senha</h2>
@@ -54,11 +54,11 @@
         </div>
 
         <?php
-            }   
+                }   
         ?>
 
         <?php
-            }else{
+            } else {
                 echo 'Precisa de um token';
             }   
         ?>

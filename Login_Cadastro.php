@@ -28,7 +28,7 @@
             <div class="w-form">
               <!-- Aqui é encaminhado para index control para validação login-->
               <form method="POST" action="index.php" id="email-form" name="email-form" data-name="Email Form" class="w-clearfix">
-                <div class="div-text-field w-clearfix"><input type="text" required name="email_login" maxlength="256" placeholder="E-MAIL" id="node" class="text-field-entrar margem-right w-input"><input  required type="text" name="password_login" maxlength="256" placeholder="SENHA" id="node" class="text-field-entrar w-input"><a href="users/esqueci-a-senha.php" class="link-esqueceu-sua-senha">Esqueceu sua senha?</a></div><input type="submit" value="ENTRAR" data-wait="Please wait..." class="botao-entrar w-button"></form>
+                <div class="div-text-field w-clearfix"><input type="text" required name="email_login" maxlength="256" placeholder="E-MAIL" id="node" class="text-field-entrar margem-right w-input"><input  required type="text" name="password_login" maxlength="256" placeholder="SENHA" id="node" class="text-field-entrar w-input"><a href="esqueci_a_senha/esqueci-a-senha.php" class="link-esqueceu-sua-senha">Esqueceu sua senha?</a></div><input type="submit" value="ENTRAR" data-wait="Please wait..." class="botao-entrar w-button"></form>
                 <?php
                 // Se post email estiver setado imprime os erros de login
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
