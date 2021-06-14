@@ -39,7 +39,7 @@ $_SESSION['username'] = $user_atual->username;
   <header>     <!-- Não estou mexendo muito no css porque fiz muita cagada lá  :') -->
      <div>
         <nav class=" feed-margin-left">
-          <a class="botao-seguir-3 a1 " href="#">Feed</a>   
+          <a class="botao-seguir-3 a1 " href="#">   Feed  </a>   
           <a class="botao-seguir-3 a1" href="feed/explorar.php">Explorar</a> 
         </nav> 
       </div>
