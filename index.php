@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if (array_key_exists('email_login', $_POST)
             && array_key_exists('password_login',$_POST)
     )  {
-        list($errors, $input) = validate_form_login();
+        list($errors, $input) = validate_form_login($db);
         if ($errors) {
             show_form($errors, $input);
         } else {
@@ -26,4 +26,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 } else {
     show_form();
+    session_destroy();
 }

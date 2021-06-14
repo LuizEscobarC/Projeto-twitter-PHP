@@ -39,7 +39,7 @@ function validate_form_cadastro()
   return array($errors, $input);
 }
 
-function validate_form_login()
+function validate_form_login($db)
 {
     $errors_login = array();
     $input_login = array();
@@ -58,7 +58,17 @@ function validate_form_login()
     if ($errors_login) {
         $errors_login = "<li>" . implode (' </li><li> ', $errors_login );
     }
+    $stmt ="SELECT id FROM users WHERE email= :email 
+    AND password= :password";
+    $resultado= $db->prepare($stmt);
 
+    $resultado->bindValue(":email", $input_login['email_login']);
+    $resultado->bindValue(":password", $input_login['password_login']);
+    $resultado->execute();
+    $input_db = $resultado->fetch(PDO::FETCH_OBJ);
+    if ($input_db === false) {
+        $errors_login[] = "Senha inválida";
+    }
 return array($errors_login, $input_login);
 }
 
@@ -80,21 +90,21 @@ function process_form($input = array(), $db)
                        ");
          header('location: Login_Cadastro.php');
     // Id é colocado na sessão userid e é logado se id estiver setado   
-  } else if (array_key_exists('email_login', $input) && $input != 0) {  
-      $stmt ="SELECT id FROM users WHERE email= :email 
-              AND password= :password";
-      $resultado= $db->prepare($stmt);
-    
-      $resultado->bindValue(":email", $input['email_login']);
-      $resultado->bindValue(":password",$input['password_login']);
-      $resultado->execute();
-      $input_db = $resultado->fetch(PDO::FETCH_OBJ); 
-      $_SESSION['userid'] = $input_db->id;
-      if ( $input_db ) {
-          header('location: publicacoes.php');
-      } else {
-          header('location: Login_Cadastro.php');
-      }
+    } else if (array_key_exists('email_login', $input) && $input != 0) {  
+        $stmt ="SELECT id FROM users WHERE email= :email 
+                AND password= :password";
+        $resultado= $db->prepare($stmt);
+        
+        $resultado->bindValue(":email", $input['email_login']);
+        $resultado->bindValue(":password",$input['password_login']);
+        $resultado->execute();
+        $input_db = $resultado->fetch(PDO::FETCH_OBJ); 
+        $_SESSION['userid'] = $input_db->id;
+        if ( $input_db ) {
+            header('location: publicacoes.php');
+        } else {
+            header('location: Login_Cadastro.php');
+        }
     }
 }
 
