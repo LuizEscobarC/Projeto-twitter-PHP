@@ -1,9 +1,12 @@
 <?php
+if (!isset($_SESSION)) { 
+    session_start();
+}
 //Seta a conexão
 $host = '127.0.0.1';
 $dbname = 'twitter';
 $user = 'root';
-$pass = '';
+$pass = ''; 
 $dsn = "mysql:dbname=$dbname;host=$host";
 
 try {

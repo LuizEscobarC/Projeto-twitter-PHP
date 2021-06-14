@@ -1,7 +1,8 @@
 <?php
-session_start();
 include '../header.php'; 
-include './function_perfil.php';?>
+include './function_perfil.php';
+deslogar();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

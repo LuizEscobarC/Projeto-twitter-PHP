@@ -1,7 +1,6 @@
 <?php
 include_once("../header.php");
 include_once("functions_explorar.php");
-session_start();
 $userid = $_SESSION['userid'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

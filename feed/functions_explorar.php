@@ -142,4 +142,10 @@ function select_perfil ($userid, $db)
     $stmt->exec();
     return $stmt->fetchAll(PDO::FETCH_OBJ);  
 }
+function deslogar()
+{
+    if ( ! in_array('userid', $_SESSION)) {
+        header('location: ../index.php');
+    }
+}
 ?>

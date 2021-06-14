@@ -1,7 +1,7 @@
 <?php
-session_start();
 include_once('../header.php');
-include_once('functions_explorar.php');    
+include_once('functions_explorar.php');  
+deslogar();  
 ?>
 
 <!DOCTYPE html>

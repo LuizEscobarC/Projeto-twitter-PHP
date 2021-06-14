@@ -40,4 +40,10 @@ function followers_count($userid, $db)
     $data = $stmt->fetchAll(PDO::FETCH_NUM);  
     return $data;
 }
+function deslogar()
+{
+    if ( ! in_array('userid', $_SESSION)) {
+        header('location: ../index.php');
+    }
+}
 ?>

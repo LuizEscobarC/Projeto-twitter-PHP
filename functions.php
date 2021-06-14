@@ -65,7 +65,6 @@ return array($errors_login, $input_login);
 function process_form($input = array(), $db)
 {
     //cadastra e volta ao começo ou loga
-    session_start();
     if (array_key_exists('email', $input) && $input != 0) {
         // Nome, se caso houver uma consulta pelo nome 
         $input_sanitaze['username'] = $db->quote($input['username']);
@@ -234,5 +233,11 @@ function select_perfil ($userid, $db)
                         WHERE id = $userid");
     $stmt->exec();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+function deslogar()
+{
+    if ( ! in_array('userid', $_SESSION)) {
+        header('location: index.php');
+    }
 }
 ?>

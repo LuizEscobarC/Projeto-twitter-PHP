@@ -1,7 +1,6 @@
 <?php
 include_once("header.php");
 include_once("functions.php");
-session_start();
 $userid = $_SESSION['userid'];
 /* Arquivo separado que realiza a lógica de armazenamento
     entre comentários e publicações

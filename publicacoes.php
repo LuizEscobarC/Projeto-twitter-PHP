@@ -1,7 +1,7 @@
 <?php
-session_start();
 include_once('header.php');
 include_once('functions.php');
+deslogar();
 //seta o username do usuario da sessão
 $stmt="SELECT username
        FROM users

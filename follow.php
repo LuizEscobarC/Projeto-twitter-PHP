@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once("header.php");
 include_once("functions.php");
 // Esse arquivo se encarrega da lógica das funções seguir ou não seguir 
