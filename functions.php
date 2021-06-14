@@ -1,14 +1,17 @@
 <?php
+// Retorna para o Login_Cadastro com erros e inputs que por ventura se algum ser válido,
+// "poderia" ser colocado novamente no formulário
 function show_form($errors = array(), $input = array()) 
 {
-    header('location: index.php');
+    include('Login_Cadastro.php');
 }
-
+/*
+*/
 function validate_form_cadastro() 
 {
     $errors = array();
     $input = array();
-    //deve ter
+
     $input['username'] = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
     if (strlen(trim($input['username'])) > 70 || ! (isset($input['username']))) {
         $errors[] = 'digite um nome válido';
@@ -18,19 +21,21 @@ function validate_form_cadastro()
         $errors[] = 'email inválido';
     }
     $input['password'] = $_POST['name-3'];
-    if (strlen($input['password']) > 8) {
-        $errors[] = 'Digite uma senha até 8 caracteres';
+    // Limitei até caracteres para ficar mais simples
+    if (strlen($input['password']) > 8 || strlen($input['password']) < 4) {
+        $errors[] = 'Digite uma senha entre 5 e 8 caracteres';
     }
     $input['new_password'] = $_POST['name-4'];
-    if ($input['new_password'] != $input['password'] || strlen($input['new_password']) < 5 || 
+    if ($input['new_password'] != $input['password'] || strlen($input['new_password']) < 4 || 
         strlen($input['new_password']) > 8) {
-        $errors[] = 'Digite uma senha maior que 8 caracteres';
+        $errors[] = 'Digite uma senha entre 5 e 8 caracteres';
     } else {
         $input['password'] = $input['new_password'];
     }
-
+  // forma a string de erros
+  if ($errors) {
   $errors = "<li>" . implode (' </li><li> ', $errors );
-
+  }  
   return array($errors, $input);
 }
 
@@ -59,24 +64,23 @@ return array($errors_login, $input_login);
 
 function process_form($input = array(), $db)
 {
-        //cadastra e volta ao começo
+    //cadastra e volta ao começo ou loga
     session_start();
     if (array_key_exists('email', $input) && $input != 0) {
-        //nome, se caso houver uma consulta pelo nome 
-        //e não seja sql injection
+        // Nome, se caso houver uma consulta pelo nome 
         $input_sanitaze['username'] = $db->quote($input['username']);
+        // Anti sql injection
         $input_sanitaze['username'] = strtr($input_sanitaze['username'],
                                       array('_'=>'\_', '%' => '\%'));
         $input_sanitaze['email'] = $db->quote($input['email']);
         $input_sanitaze['password'] = $db->quote($input['password']);
-            //cadastra
         $c = $db->exec("
                         INSERT INTO users ( username, email, password )
                         VALUES ( $input_sanitaze[username], 
                         $input_sanitaze[email], $input_sanitaze[password] )
                        ");
-         header('location: index.php');
-        //loga na conta pela key de $input   
+         header('location: Login_Cadastro.php');
+    // Id é colocado na sessão userid e é logado se id estiver setado   
   } else if (array_key_exists('email_login', $input) && $input != 0) {  
       $stmt ="SELECT id FROM users WHERE email= :email 
               AND password= :password";
@@ -90,29 +94,27 @@ function process_form($input = array(), $db)
       if ( $input_db ) {
           header('location: publicacoes.php');
       } else {
-          header('location: index.php');
+          header('location: Login_Cadastro.php');
       }
     }
 }
 
-//adiciona um post
+// adiciona um post
 function add_post($userid,$body, $db)
 {
-    $stmt = $db->prepare("insert into posts (user_id, body, stamp)
-                          values ( ?, ?, now())");
-
+    $stmt = $db->prepare("INSERT INTO posts (user_id, body, stamp)
+                          VALUES ( ?, ?, NOW())");
     $result = $stmt->execute([$userid, $body]);
 }
 
 function add_comment($userid,$body, $other_user_id, $id_post, $db)
 {
     $stmt = $db->prepare("INSERT INTO comments(user_id, body_comment, other_user_id,
-                                      id_comment, stamp)values ( ?, ?, ?, ?, now())");
-
+                                      id_comment, stamp) VALUES ( ?, ?, ?, ?, NOW())");
     $result = $stmt->execute([$userid, $body, $other_user_id, $id_post]);
 }
 
-//mostra as publicações
+// Imprime as publicações
 function show_posts($userid, $db)
 {
     $array_user = array();
@@ -127,8 +129,11 @@ function show_posts($userid, $db)
     $n = count($array_user);
 
     $placeholders = '?'. str_repeat(',?', $n - 1); 
-    //no exemplo a string gerada é ?,?,?
+    // No exemplo a string gerada é ?,?,?
     //aqui eu recupero o post user id, corpo, e tempo
+    // Com essa função dava pra criar mais um funcionalidade onde se aumenta
+    // o limite de posts e atualiza se certo botão for clicado (carregar mais), igual ao antigo
+    // feed do Facebook que hoje é automático
     $consulta = "SELECT id ,user_id, body, stamp FROM posts
     WHERE user_id IN ( $placeholders )  
     ORDER BY stamp DESC LIMIT 5";
@@ -138,7 +143,7 @@ function show_posts($userid, $db)
     
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // aqui eu recupero ID e BODY de comments
+    // recupera ID e BODY de comments
     $q = $db->query("SELECT comments.id_comment, comments.body_comment, 
                             posts.user_id, comments.stamp, comments.user_id
                      FROM comments, posts 
@@ -149,7 +154,7 @@ function show_posts($userid, $db)
     return array($posts, $comments);
 
 }
-//imprime uduários para SEGUIR que não seja o próprio da sessão
+//imprime uduários Seguidos que não seja o próprio da sessão
 function show_users($db)
 {
     $users = array();
@@ -160,7 +165,9 @@ function show_users($db)
     $result->execute();
 
     while ($data = $result->fetch(PDO::FETCH_OBJ)) {
-        $users[$data->id] = $data->username;
+       if ($data->id != $_SESSION['userid']) { 
+           $users[$data->id] = $data->username;
+       }
     }
     return $users;
 }

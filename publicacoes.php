@@ -42,12 +42,15 @@ $_SESSION['username'] = $user_atual->username;
      <div>
       <nav class="feed feed-margin-left">
         <a class="botao-seguir-3 a1" href="#">Feed</a>   
-        <a class="botao-seguir-3 a1" href="feed/explorar.php">Explorar</a>  
-        <a class="botao-seguir-3 a1" href="feed/perfil.php">Perfil</a></nav>
-      </div>
+        <a class="botao-seguir-3 a1" href="feed/explorar.php">Explorar</a>  </div>
       <div class="div-perfil">
         <p class="nome-perfil"><?=$_SESSION['username']?></p>
-        <a href="control.php" class="botao-seguir w-inline-block">
+<?php 
+// Envia o id e usuario da sessão por GET
+    print"        <a class=\"botao-seguir-3\" href=\"./perfil/perfil.php
+                  ?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></nav>";
+?>
+        <a href="index.php" class="botao-seguir w-inline-block">
           <p class="seguir">Sair</p>
         </a>    
       </div>

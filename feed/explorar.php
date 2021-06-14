@@ -11,7 +11,7 @@ include_once('functions_explorar.php');
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <title>Publicações</title>
+  <title>Explorar</title>
   <meta content="Publicações" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
@@ -28,19 +28,28 @@ include_once('functions_explorar.php');
   </head>
   <body>
     <div class="topo-publicacoes w-clearfix">
+     <!-- Essa página é igual a publicações com algumas mudanças e com algumas mudanças:
+                          1 - Imprime todo mundo para seguir ou não.
+                          2 - Não tem a função DESLOGAR.
+                          3 - Não tem limite de Posts.
+     -->
      <!--  :') NAV  -->
-     <div>
-      <nav class="feed feed-margin-left">
+      <div>
+        <nav class="feed feed-margin-left">
         <a class="botao-seguir-3 a1" href="../publicacoes.php">Feed</a>   
-        <a class="botao-seguir-3 a1" href="#">Explorar</a>  
-        <a class="botao-seguir-3 a1" href="perfil.php">Perfil</a></nav>
+        <a class="botao-seguir-3 a1" href="#">Explorar</a></nav>  
       </div>
       
       <div class="div-perfil">
         <p class="nome-perfil"><?=$_SESSION['username']?></p>
+<?php 
+// Envia o id e usuario da sessão por GET
+    print"        <a class=\"botao-seguir-3\" href=\"../perfil/perfil.php
+                  ?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></nav>";
+?>        
         <p>.</p>
         <?php 
-          // imprime os usuários e se quer seguir ou não
+        // Imprime os usuários e se quer seguir ou não
         $users = show_users($db);
         $following = following($_SESSION['userid'], $db);
 
@@ -67,11 +76,9 @@ include_once('functions_explorar.php');
               <form id="email-form" name="email-form" data-name="Email Form" method="POST" action="./add.php"><textarea placeholder="Texto da Publicação" maxlength="5000" id="field" name="body" class="texto-publicar w-input"></textarea><input type="submit" value="Publicar" data-wait="Please wait..." class="botao-publicar w-button"></form>
             </div>
           </div>
-          <p class="feed">Explorar</p>
           <!-- fim do feed do usuario-->
           <?php
           list($posts, $comments) = show_posts($_SESSION['userid'], $db);
-          //tenho o id do post, id do comentario, do usuario, do outro
           if (count($posts)) {
               foreach ($posts as $post) {
                   $user_id_post = select_username($post['user_id'], $db);
@@ -79,7 +86,6 @@ include_once('functions_explorar.php');
                   print "<div class=\"div-publicacao-feed\">\n";
                   print  "<p class=\"texto-publicacao\"><b>@{$user_id_post}</b>{$post['body']}</p>\n";
                   print "<div class=\"div-comentario-existente\">\n";              
-                 /*************************************************************/
                  //imprime comentários
                   foreach ($comments as $comment) { 
                       $post_id = $post['id'];
@@ -96,8 +102,6 @@ include_once('functions_explorar.php');
                             }
                       }
                   }
-                  /* */
-                  /************************************************************/
                   print  "<div class=\"w-form\">\n";
                   print  "<form id=\"email-form-2\" method=\"GET\" action=\"add.php\" name=\"email-form-2\" data-name=\"Email Form 2\" class=\"w-clearfix\"><input type=\"hidden\" name=\"other_user_id\" value=\"$post[user_id]\"><input type=\"hidden\" name=\"post_id\" value=\"$post[id]\"> <textarea placeholder=\"...\" maxlength=\"5000\" id=\"field-2\" name=\"body_comment\" class=\"textarea w-input\"></textarea><input type=\"submit\" value=\"Comentar\" data-wait=\"Please wait...\" class=\"submit-button w-button\"></form>\n";
                   print "</div>\n";

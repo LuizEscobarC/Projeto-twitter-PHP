@@ -3,6 +3,9 @@ include_once("header.php");
 include_once("functions.php");
 session_start();
 $userid = $_SESSION['userid'];
+/* Arquivo separado que realiza a lógica de armazenamento
+    entre comentários e publicações
+*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $body = substr($_POST['body'], 0, 140);
     add_post($userid, $body, $db);
@@ -16,5 +19,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         header("Location: publicacoes.php");
   }
-  $_SESSION['message'] = "Seu post foi adicionado!";
+  //$_SESSION['message'] = "Seu post foi adicionado!";
 }

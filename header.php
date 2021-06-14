@@ -1,4 +1,5 @@
 <?php
+//Seta a conexão
 $host = '127.0.0.1';
 $dbname = 'twitter';
 $user = 'root';
@@ -11,7 +12,7 @@ try {
     print "Error: " . $e->getMessage();
 }
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+// Ignorar
 if ($tableExists = $db->query("SHOW TABLES LIKE 'users'")
                       ->rowCount() == 0
 ) {

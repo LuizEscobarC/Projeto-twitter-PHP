@@ -1,7 +1,7 @@
 <?php
 function show_form($errors = array(), $input = array()) 
 {
-    header('location: index.php');
+    header('location: Login_Cadastro.php');
 }
 
 //adiciona um post
@@ -62,7 +62,7 @@ function show_posts($userid, $db)
     return array($posts, $comments);
 
 }
-//imprime uduários para SEGUIR que não seja o próprio da sessão
+//imprime uduários para SEGUIR ou DEIXAR de seguir que não seja o próprio da sessão
 function show_users($db)
 {
     $users = array();
@@ -71,12 +71,13 @@ function show_users($db)
     $result = $db->prepare($stmt);
     $result->execute();
     while ($data = $result->fetch(PDO::FETCH_OBJ)) {
-      $users[$data->id] = $data->username;
-    }
-
-    return $users;
+        if ($data->id != $_SESSION['userid']) { 
+            $users[$data->id] = $data->username;
+        }
+     }
+     return $users;
 }
-//retorna quem o usuario esta seguindo
+// Retorna quem o usuario esta seguindo
 function following($userid, $db)
 {
     $users = array();
@@ -91,7 +92,7 @@ function following($userid, $db)
     return $users;
 }
 
-//checa se já segue ou não e retorna a contagem $first = me, $second  = them
+// Checa se já segue ou não e retorna a contagem $first = me, $second  = them
 function check_count($first, $second,$db)
 {
     $stmt = $db->prepare( "SELECT count(*) AS count FROM following

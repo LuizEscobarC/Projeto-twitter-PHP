@@ -2,6 +2,8 @@
 session_start();
 include_once("header.php");
 include_once("functions.php");
+// Esse arquivo se encarrega da lógica das funções seguir ou não seguir 
+// GET é enviado via href
 $id = $_GET['id'];
 $do = $_GET['do'];
 
