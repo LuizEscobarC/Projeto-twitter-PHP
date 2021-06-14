@@ -1,12 +1,12 @@
   .a1 {
     background-color:#039FF5;
     margin-right: 10px;
+    margin-bottom: 10px;
   }
   .feed-margin-left {
-    padding-left: 429px;
+    padding-bottom: 30px;
     padding-top: 20px;
-    padding-bottom: 24px;
-    
+    padding-left: 130px;
   }
   .follow_list {
     background-color:#039FF5;
@@ -20,10 +20,8 @@
   }
   nav {
     background-color:#03a0f551;
-    padding-right: 500px;
-    padding-left: 500px;
-    
-
+    padding: 10px;
+    position: relative;
   }
   .bloco-publicacao {
     margin-top: 100px;

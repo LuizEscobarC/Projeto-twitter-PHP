@@ -36,13 +36,19 @@ $_SESSION['username'] = $user_atual->username;
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="images/webclip.png" rel="apple-touch-icon">
   </head>
+  <header>     <!-- Não estou mexendo muito no css porque fiz muita cagada lá  :') -->
+     <div>
+        <nav class=" feed-margin-left">
+          <a class="botao-seguir-3 a1 " href="#">Feed</a>   
+          <a class="botao-seguir-3 a1" href="feed/explorar.php">Explorar</a> 
+        </nav> 
+      </div>
+  </header>
   <body>
     <div class="topo-publicacoes w-clearfix">
-     <!-- Não estou mexendo muito no css porque fiz muita cagada lá  :') -->
-     <div>
-      <nav class="feed feed-margin-left">
-        <a class="botao-seguir-3 a1" href="#">Feed</a>   
-        <a class="botao-seguir-3 a1" href="feed/explorar.php">Explorar</a>  </div>
+
+
+
       <div class="div-perfil">
         <p class="nome-perfil"><?=$_SESSION['username']?></p>
 <?php 
