@@ -25,6 +25,12 @@ $_SESSION['username'] = $user_atual->username;
   <meta content="Publicações" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
@@ -36,26 +42,22 @@ $_SESSION['username'] = $user_atual->username;
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="images/webclip.png" rel="apple-touch-icon">
   </head>
-  <header>     <!-- Não estou mexendo muito no css porque fiz muita cagada lá  :') -->
-     <div>
-        <nav class=" feed-margin-left">
-          <a class="botao-seguir-3 a1 " href="#">   Feed  </a>   
-          <a class="botao-seguir-3 a1" href="feed/explorar.php">Explorar</a> 
-        </nav> 
-      </div>
-  </header>
+  <nav>
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <?php 
+        // Envia o id e usuario da sessão por GET
+        print"<li><a href=\"./perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
+        ?>
+        <li><a href="#.php">Publicações</a></li>
+        <li><a href="feed/explorar.php">Explorar</a></li>
+      </ul>
+    </div>
+  </nav>
   <body>
     <div class="topo-publicacoes w-clearfix">
-
-
-
       <div class="div-perfil">
         <p class="nome-perfil"><?=$_SESSION['username']?></p>
-<?php 
-// Envia o id e usuario da sessão por GET
-    print"        <a class=\"botao-seguir-3\" href=\"./perfil/perfil.php
-                  ?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></nav>";
-?>
         <a href="index.php" class="botao-seguir w-inline-block">
           <p class="seguir">Sair</p>
         </a>    

@@ -15,6 +15,12 @@ deslogar();
   <meta content="Publicações" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
   <link href="../css/normalize.css" rel="stylesheet" type="text/css">
   <link href="../css/webflow.css" rel="stylesheet" type="text/css">
   <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -27,27 +33,29 @@ deslogar();
     <link href="../images/webclip.png" rel="apple-touch-icon">
   </head>
   <body>
+    <nav>
+      <div class="nav-wrapper #0091ea light-blue accent-4">
+       <ul id="nav-mobile" class="right hide-on-med-and-down #0091ea light-blue accent-4">
+        <?php 
+        // Envia o id e usuario da sessão por GET
+          print"<li><a href=\"./perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
+        ?>
+        <li><a href="../publicacoes.php">Publicações</a></li>
+        <li><a href="#">Explorar</a></li>
+      </ul>
+     </div>
+    </nav>
     <div class="topo-publicacoes w-clearfix">
      <!-- Essa página é igual a publicações com algumas mudanças e com algumas mudanças:
                           1 - Imprime todo mundo para seguir ou não.
                           2 - Não tem a função DESLOGAR.
                           3 - Não tem limite de Posts.
-     -->
-     <!--  :') NAV  -->
-      <div>
-        <nav class="feed feed-margin-left">
-        <a class="botao-seguir-3 a1" href="../publicacoes.php">Feed</a>   
-        <a class="botao-seguir-3 a1" href="#">Explorar</a></nav>  
-      </div>
-      
+     -->       
       <div class="div-perfil">
-        <p class="nome-perfil"><?=$_SESSION['username']?></p>
-<?php 
-// Envia o id e usuario da sessão por GET
-    print"        <a class=\"botao-seguir-3\" href=\"../perfil/perfil.php
-                  ?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></nav>";
-?>        
-        <p>.</p>
+        <p class="nome-perfil"><?=$_SESSION['username']?></p>  
+        <a href="index.php" class="botao-seguir w-inline-block">
+          <p class="seguir">Sair</p>
+        </a>  
         <?php 
         // Imprime os usuários e se quer seguir ou não
         $users = show_users($db);
