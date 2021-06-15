@@ -38,7 +38,7 @@ deslogar();
        <ul id="nav-mobile" class="right hide-on-med-and-down #0091ea light-blue accent-4">
         <?php 
         // Envia o id e usuario da sessão por GET
-          print"<li><a href=\"./perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
+          print"<li><a href=\"../perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
         ?>
         <li><a href="../publicacoes.php">Publicações</a></li>
         <li><a href="#">Explorar</a></li>

@@ -47,7 +47,7 @@ $_SESSION['username'] = $user_atual->username;
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <?php 
         // Envia o id e usuario da sessão por GET
-        print"<li><a href=\"./perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
+        print"<li><a href=\"perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
         ?>
         <li><a href="#.php">Publicações</a></li>
         <li><a href="feed/explorar.php">Explorar</a></li>
