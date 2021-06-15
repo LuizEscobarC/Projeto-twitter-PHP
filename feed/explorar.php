@@ -34,17 +34,17 @@ deslogar();
   </head>
   <body>
     <nav>
-      <div class="nav-wrapper #0091ea light-blue accent-4">
-       <ul id="nav-mobile" class="right hide-on-med-and-down #0091ea light-blue accent-4">
-        <?php 
-        // Envia o id e usuario da sessão por GET
-          print"<li><a href=\"../perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
-        ?>
-        <li><a href="../publicacoes.php">Publicações</a></li>
-        <li><a href="#">Explorar</a></li>
-      </ul>
-     </div>
-    </nav>
+      <div class="nav-wrapper #1565c0 blue darken-3">
+              <ul class="side-nav" id="menu-mobile">
+                  <?php 
+                  // Envia o id e usuario da sessão por GET
+                  print"<li><a href=\"../perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
+                  ?>
+                  <li><a href="../publicacoes.php">Publicações</a></li>
+                  <li><a href="#">Explorar</a></li>
+              </ul>
+          </div>
+      </nav>
     <div class="topo-publicacoes w-clearfix">
      <!-- Essa página é igual a publicações com algumas mudanças e com algumas mudanças:
                           1 - Imprime todo mundo para seguir ou não.
@@ -56,6 +56,7 @@ deslogar();
         <a href="index.php" class="botao-seguir w-inline-block">
           <p class="seguir">Sair</p>
         </a>  
+        
         <?php 
         // Imprime os usuários e se quer seguir ou não
         $users = show_users($db);
@@ -127,6 +128,13 @@ deslogar();
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="../js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script>
+    $(function(){
+        $(".button-collapse").sideNav();
+    });
+    </script>
  </body>
 </html>
 

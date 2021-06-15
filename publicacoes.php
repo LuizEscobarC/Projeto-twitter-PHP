@@ -43,44 +43,43 @@ $_SESSION['username'] = $user_atual->username;
     <link href="images/webclip.png" rel="apple-touch-icon">
   </head>
   <nav>
-    <div class="nav-wrapper">
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <?php 
-        // Envia o id e usuario da sessão por GET
-        print"<li><a href=\"perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
-        ?>
-        <li><a href="#.php">Publicações</a></li>
-        <li><a href="feed/explorar.php">Explorar</a></li>
-      </ul>
-    </div>
-  </nav>
+      <div class="nav-wrapper #1565c0 blue darken-3">
+              <ul class="side-nav" id="menu-mobile">
+                  <?php 
+                  // Envia o id e usuario da sessão por GET
+                  print"<li><a href=\"perfil/perfil.php?userid=$_SESSION[userid]&name=$_SESSION[username]\">Perfil</a></li>";
+                  ?>
+                  <li><a href="#">Publicações</a></li>
+                  <li><a href="feed/explorar.php">Explorar</a></li>
+              </ul>
+      </div>
+    </nav>
   <body>
     <div class="topo-publicacoes w-clearfix">
       <div class="div-perfil">
         <p class="nome-perfil"><?=$_SESSION['username']?></p>
         <a href="index.php" class="botao-seguir w-inline-block">
           <p class="seguir">Sair</p>
-        </a>    
-      </div>
-      <div class="div-perfil-2">
-      <?php 
-      // imprime os usuários e se quer seguir ou não
-      $users = show_users($db);
-      $following = following($_SESSION['userid'], $db);
+        </a>
+        <?php 
+        // imprime os usuários e se quer seguir ou não
+        $users = show_users($db);
+        $following = following($_SESSION['userid'], $db);
 
-      foreach ($users as $key => $user) {
-          if (in_array($key, $following)){
-              print "<p class=\" p-font\">@". $user ."</p>";
-              $_GET['id'] = $key;
-              $_GET['do'] = 'follow';
-              print"<a nome=\"follow\" href=\"follow.php?id=$key&do=unfollow\"
-                       class=\"botao-seguir-2 follow_list w-inline-block\">
-                    <p class=\"seguir\"><small>Deixar de seguir</small></p>
-                    </a>";      
-          }
-      } 
-      ?>
+        foreach ($users as $key => $user) {
+            if (in_array($key, $following)){
+                print "<p class=\" p-font\">@". $user ."</p>";
+                $_GET['id'] = $key;
+                $_GET['do'] = 'follow';
+                print"<a nome=\"follow\" href=\"follow.php?id=$key&do=unfollow\"
+                        class=\"botao-seguir-2 follow_list w-inline-block\">
+                      <p class=\"seguir\"><small>Deixar de seguir</small></p>
+                      </a>";      
+            }
+        } 
+        ?>    
       </div>
+
       <div class="div-feed">
         <div class="container-publicacoes">
           <div class="bloco-publicacao">
@@ -141,6 +140,13 @@ $_SESSION['username'] = $user_atual->username;
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script>
+      $(function(){
+          $(".button-collapse").sideNav();
+      });
+  </script>
   </body>
 </html>
 

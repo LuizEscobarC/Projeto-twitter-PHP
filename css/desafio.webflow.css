@@ -101,20 +101,7 @@
 .topo-publicacoes {
   position: relative;
 }
-.div-perfil-2 {
-  position: absolute;
-  left: auto;
-  top: auto;
-  right: 0%;
-  bottom: auto;
-  display: inline-block;
-  width: 25%;
-  height: 100%;
-  margin-top: 0px;
-  float: right;
-  background-color: #039ff5;
-  text-align: center;
-}
+
 .div-perfil {
   position: absolute;
   left: 0%;
@@ -371,9 +358,7 @@
   .div-perfil {
     width: 200px;
   }
-  .div-perfil-2 {
-    width: 300px;
-  }
+
   .div-feed {
     width: 70%;
   }
@@ -402,13 +387,8 @@
     position: relative;
     width: 100%;
     padding-bottom: 30px;
-    margin-top: 0px;
   }
-  .div-perfil-2 {
-    position: relative;
-    width: 100%;
-    padding-bottom: 30px;
-  }
+
   .div-feed {
     width: 100%;
     padding-left: 0%;
